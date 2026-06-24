@@ -56,9 +56,25 @@
         .hero {
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
             color: white;
-            padding: 100px 60px;
+            padding: 40px 60px 80px;
             text-align: center;
         }
+	.hero-logo {
+    	    width: 360px;
+    	    max-width: 85%;
+    	    display: block;
+    	    margin: -35px auto -60px auto;
+    	    opacity: 0.98;
+    	    filter: drop-shadow(0 15px 35px rgba(255,255,255,0.12));
+	}
+
+	.hero-subtitle {
+    	    color: #cbd5e1;
+            font-size: 18px;
+            margin-top: 0;
+	    margin-bottom: 18px;
+            letter-spacing: 0.5px;
+	}
 
         .hero-badge {
             display: inline-block;
@@ -409,9 +425,11 @@
 
 <!-- HERO -->
 <section class="hero">
+    <img src="riskterrain_logo.png" alt="RiskTerrain logo" class="hero-logo">
+    <div class="hero-subtitle">AI-Assisted CPTED Analytics</div>
     <div class="hero-badge">Spatial Risk Intelligence</div>
     <h1>Know the risk before<br><span>you open the doors.</span></h1>
-    <p>RiskTerrain generates instant Retail Safety Scores for any location — so you can make smarter security decisions, faster.</p>
+    <p>RiskTerrain compares locations, scores retail risk, and generates CPTED-informed safety reports using crime and environmental data.</p>    
     <div class="hero-buttons">
         <a href="mailto:alexbabb37@gmail.com" class="btn-primary">Request a Demo</a>
         <a href="#how" class="btn-secondary">See How It Works</a>
@@ -425,7 +443,7 @@
         <div class="stat-label">Crime incidents analyzed</div>
     </div>
     <div class="stat">
-        <div class="stat-number">4</div>
+        <div class="stat-number">5</div>
         <div class="stat-label">Crime categories scored</div>
     </div>
     <div class="stat">
@@ -442,7 +460,7 @@
 <section class="section" id="how">
     <div class="section-label">How It Works</div>
     <h2>From address to report<br>in seconds.</h2>
-    <p class="section-sub">No consultants. No site visits required for a first assessment. Just type an address and get an instant, data-driven risk report.</p>
+    <p class="section-sub">Designed to support faster first-pass risk screening and better-informed site security decisions. Type an address and get a clear, data driven risk report.</p>
     <div class="steps">
         <div class="step">
             <div class="step-number">1</div>
@@ -452,12 +470,12 @@
         <div class="step">
             <div class="step-number">2</div>
             <h3>Get your score</h3>
-            <p>Receive an overall Retail Safety Score out of 100, plus sub-scores for Break & Enter, Robbery, Assault, and Auto Theft — each with a risk level and incident count.</p>
+            <p>Receive an overall Retail Safety Score out of 100, plus sub-scores for Theft Over $5000, Break & Enter, Robbery, Assault, and Auto Theft — each with a risk level and incident count.</p>
         </div>
         <div class="step">
             <div class="step-number">3</div>
             <h3>Download your report</h3>
-            <p>Get a professional PDF report with an executive summary, key risk drivers, site review checklist, priority CPTED strategies, and tailored recommendations.</p>
+            <p>Get a professional PDF report with an executive summary, key risk drivers, priority vulnerability areas, recommended CPTED interventions, and clear next steps.</p>
         </div>
     </div>
 </section>
@@ -507,6 +525,11 @@
         </div>
 
         <div class="score-grid">
+	    <div class="score-item">
+   	        <div class="score-item-label">Theft Over $5000</div>
+    	        <div class="score-item-value">92.1/100</div>
+                <div class="score-item-risk">🔴 Critical — 217 nearby incidents</div>
+	    </div>
             <div class="score-item">
                 <div class="score-item-label">Break & Enter</div>
                 <div class="score-item-value">100/100</div>
@@ -534,7 +557,7 @@
 <!-- CTA -->
 <section class="cta-section">
     <h2>Ready to see RiskTerrain<br>in action?</h2>
-    <p>Request a live demo and we'll score any location you choose — in real time.</p>
+    <p>Request a walkthrough and see how RiskTerrain scores locations, compares stores, and generates branded PDF reports.</p>
     <a href="mailto:alexbabb37@gmail.com" class="btn-primary" style="font-size:18px; padding: 18px 40px;">Request a Demo</a>
 </section>
 
