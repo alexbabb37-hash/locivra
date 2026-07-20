@@ -1,870 +1,597 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Locivra — Spatial Risk Intelligence</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            color: #1a1a2e;
-            background: #ffffff;
-        }
-
-        /* NAV */
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 60px;
-            background: white;
-            border-bottom: 1px solid #f0f0f0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-        }
-
-        .logo {
-            font-size: 22px;
-            font-weight: 700;
-            color: #1a1a2e;
-            letter-spacing: -0.5px;
-        }
-
-        .logo span {
-            color: #2563eb;
-        }
-
-        .nav-links a {
-            margin-left: 30px;
-            text-decoration: none;
-            color: #555;
-            font-size: 15px;
-        }
-
-        .nav-cta {
-            background: #2563eb;
-            color: white !important;
-            padding: 10px 20px;
-            border-radius: 6px;
-            font-weight: 600 !important;
-        }
-
-        /* HERO */
-        .hero {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-            color: white;
-            padding: 40px 60px 80px;
-            text-align: center;
-        }
-	.hero-logo {
-    	    width: 360px;
-    	    max-width: 85%;
-    	    display: block;
-    	    margin: -35px auto -60px auto;
-    	    opacity: 0.98;
-    	    filter: drop-shadow(0 15px 35px rgba(255,255,255,0.12));
-	}
-
-	.hero-subtitle {
-    	    color: #cbd5e1;
-            font-size: 18px;
-            margin-top: 0;
-	    margin-bottom: 18px;
-            letter-spacing: 0.5px;
-	}
-
-        .hero-badge {
-            display: inline-block;
-            background: rgba(37, 99, 235, 0.3);
-            border: 1px solid rgba(37, 99, 235, 0.5);
-            color: #93c5fd;
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: 13px;
-            margin-bottom: 24px;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        .hero h1 {
-            font-size: 54px;
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 24px;
-            letter-spacing: -1px;
-        }
-
-        .hero h1 span {
-            color: #60a5fa;
-        }
-
-        .hero p {
-            font-size: 20px;
-            color: #94a3b8;
-            max-width: 600px;
-            margin: 0 auto 40px;
-            line-height: 1.6;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 16px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .btn-primary {
-            background: #2563eb;
-            color: white;
-            padding: 16px 32px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 16px;
-            transition: background 0.2s;
-        }
-
-        .btn-primary:hover { background: #1d4ed8; }
-
-        .btn-secondary {
-            background: rgba(255,255,255,0.1);
-            color: white;
-            padding: 16px 32px;
-            border-radius: 8px;
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 16px;
-            border: 1px solid rgba(255,255,255,0.2);
-        }
-
-        /* STATS BAR */
-        .stats {
-            background: #f8fafc;
-            padding: 40px 60px;
-            display: flex;
-            justify-content: center;
-            gap: 80px;
-            flex-wrap: wrap;
-            border-bottom: 1px solid #e2e8f0;
-        }
-
-        .stat {
-            text-align: center;
-        }
-
-        .stat-number {
-            font-size: 36px;
-            font-weight: 800;
-            color: #2563eb;
-        }
-
-        .stat-label {
-            font-size: 14px;
-            color: #64748b;
-            margin-top: 4px;
-        }
-
-        /* HOW IT WORKS */
-        .section {
-            padding: 80px 60px;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        .section-label {
-            font-size: 13px;
-            font-weight: 600;
-            color: #2563eb;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 12px;
-        }
-
-        .section h2 {
-            font-size: 36px;
-            font-weight: 800;
-            margin-bottom: 16px;
-            letter-spacing: -0.5px;
-        }
-
-        .section-sub {
-            font-size: 18px;
-            color: #64748b;
-            margin-bottom: 48px;
-            max-width: 600px;
-            line-height: 1.6;
-        }
-
-        .steps {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 32px;
-        }
-
-        .step {
-            background: #f8fafc;
-            border-radius: 12px;
-            padding: 32px;
-            border: 1px solid #e2e8f0;
-        }
-
-        .step-number {
-            width: 40px;
-            height: 40px;
-            background: #2563eb;
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            margin-bottom: 16px;
-        }
-
-        .step h3 {
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-
-        .step p {
-            color: #64748b;
-            line-height: 1.6;
-            font-size: 15px;
-        }
-
-	/* WHY Locivra */
-	.problem-grid {
-   	    display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 32px;
-            margin-top: 48px;
-	}
-
-	.problem-card {
-            background: #f8fafc;
-            border: 1px solid #e2e8f0;
-            border-radius: 16px;
-            padding: 32px;
-	}
-
-	.problem-card h3 {
-    	    font-size: 22px;
-    	    margin-bottom: 16px;
-	}
-
-	.problem-card p {
-    	    color: #64748b;
-    	    line-height: 1.7;
-    	    font-size: 16px;
-	}
-
-	.problem-card ul {
-    	    list-style: none;
-   	    padding: 0;
-   	    margin-top: 18px;
-	}
-
-	.problem-card li {
-           color: #475569;
-    	   margin-bottom: 12px;
-    	   font-size: 16px;
-	}
-
-       /* DATA & METHODOLOGY */
-
-	.data-section{
-           background:#f8fafc;
-    	   padding:80px 60px;
-    	   border-top:1px solid #e2e8f0;
-    	   border-bottom:1px solid #e2e8f0;
-	}
-
-	.data-inner{
-    	   max-width:1100px;
-    	   margin:0 auto;
-	}
-
-	.data-grid{
-    	   display:grid;
-    	   grid-template-columns:repeat(3,1fr);
-    	   gap:24px;
-    	   margin-top:50px;
-	}
-
-	.data-card{
-    	   background:white;
-    	   border:1px solid #e2e8f0;
-    	   border-radius:14px;
-    	   padding:28px;
-    	   box-shadow:0 2px 8px rgba(0,0,0,.04);
-	}
-
-	.data-card h3{
-    	   font-size:20px;
-    	   margin-bottom:14px;
-	}
-
-	.data-card p{
-    	   color:#64748b;
-    	   line-height:1.7;
-    	   font-size:15px;
-	}
-	
-	/* WHO IT'S FOR */
-        .for-section {
-            background: #f8fafc;
-            padding: 80px 60px;
-            border-top: 1px solid #e2e8f0;
-            border-bottom: 1px solid #e2e8f0;
-        }
-
-        .for-inner {
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-            margin-top: 48px;
-        }
-
-        .card {
-            background: white;
-            border-radius: 12px;
-            padding: 32px;
-            border: 1px solid #e2e8f0;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-        }
-
-        .card-icon {
-            font-size: 32px;
-            margin-bottom: 16px;
-        }
-
-        .card h3 {
-            font-size: 18px;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-
-        .card p {
-            color: #64748b;
-            line-height: 1.6;
-            font-size: 15px;
-        }
-
-        /* SCORE EXAMPLE */
-        .score-section {
-            padding: 80px 60px;
-            max-width: 1100px;
-            margin: 0 auto;
-        }
-
-        .score-demo {
-            background: #1a1a2e;
-            border-radius: 16px;
-            padding: 48px;
-            color: white;
-            margin-top: 48px;
-        }
-
-        .score-demo h3 {
-            font-size: 14px;
-            color: #94a3b8;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 8px;
-        }
-
-        .score-demo h4 {
-            font-size: 20px;
-            margin-bottom: 32px;
-            color: white;
-        }
-
-        .score-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 16px;
-        }
-
-        .score-item {
-            background: rgba(255,255,255,0.05);
-            border-radius: 8px;
-            padding: 20px;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .score-item-label {
-            font-size: 13px;
-            color: #94a3b8;
-            margin-bottom: 8px;
-        }
-
-        .score-item-value {
-            font-size: 28px;
-            font-weight: 800;
-            color: #ef4444;
-        }
-
-        .score-item-value.low { color: #22c55e; }
-        .score-item-value.mod { color: #f59e0b; }
-
-        .score-item-risk {
-            font-size: 12px;
-            color: #94a3b8;
-            margin-top: 4px;
-        }
-
-        .overall-score {
-            background: rgba(239, 68, 68, 0.15);
-            border: 1px solid rgba(239, 68, 68, 0.3);
-            border-radius: 12px;
-            padding: 24px;
-            margin-bottom: 24px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .overall-label { color: #94a3b8; font-size: 14px; }
-        .overall-value { font-size: 48px; font-weight: 800; color: #ef4444; }
-        .overall-tag {
-            background: #ef4444;
-            color: white;
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 600;
-        }
-
-        /* REPORT PREVIEW */
-
-	.report-preview{
-    	    display:flex;
-            align-items:center;
-            justify-content:space-between;
-            gap:70px;
-            margin-top:60px;
-	}
-
-	.report-text{
-    	   flex:1;
-	}
-
-	.report-text h3{
-    	   font-size:28px;
-           margin-bottom:22px;
-	}
-
-	.report-text ul{
-           list-style:none;
-           padding:0;
-           margin:0 0 35px;
-	}
-
-	.report-text li{
-    	   font-size:18px;
-           color:#475569;
-           margin-bottom:16px;
-	}
-
-	.report-image{
-    	   flex:1;
-           text-align:center;
-	}
-
-	.report-image img{
-           width:100%;
-           max-width:520px;
-           border-radius:18px;
-           box-shadow:0 25px 70px rgba(0,0,0,.18);
-           transition:.35s;
-	}
-
-	.report-image img:hover{
-           transform:translateY(-8px) scale(1.02);
-	}
-
-	/* CTA */
-        .cta-section {
-            background: linear-gradient(135deg, #1a1a2e, #0f3460);
-            padding: 100px 60px;
-            text-align: center;
-            color: white;
-        }
-
-        .cta-section h2 {
-            font-size: 42px;
-            font-weight: 800;
-            margin-bottom: 16px;
-        }
-
-        .cta-section p {
-            font-size: 18px;
-            color: #94a3b8;
-            margin-bottom: 40px;
-        }
-
-        /* FOOTER */
-        footer {
-            background: #0f172a;
-            color: #64748b;
-            padding: 32px 60px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 14px;
-        }
-
-        @media (max-width: 768px) {
-            nav { padding: 16px 20px; }
-            .hero { padding: 60px 20px; }
-            .hero h1 { font-size: 36px; }
-            .steps { grid-template-columns: 1fr; }
-            .cards { grid-template-columns: 1fr; }
-            .score-grid { grid-template-columns: 1fr; }
-            .stats { gap: 32px; padding: 32px 20px; }
-            .section { padding: 60px 20px; }
-            .for-section { padding: 60px 20px; }
-            footer { flex-direction: column; gap: 8px; text-align: center; }
-        }
-    </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Locivra helps multi-location organizations prioritize which sites deserve security attention first using explainable historical crime-data analysis.">
+  <meta name="theme-color" content="#081a33">
+  <title>Locivra — Location Intelligence for Security Prioritization</title>
+  <style>
+    :root {
+      --navy: #081a33;
+      --navy-2: #102b52;
+      --ink: #102a43;
+      --blue: #2563eb;
+      --blue-dark: #1d4ed8;
+      --cyan: #3ec6c4;
+      --mist: #f4f8fb;
+      --muted: #60758a;
+      --line: #dbe6ed;
+      --white: #fff;
+      --amber-bg: #fff8e8;
+      --amber: #785400;
+      --radius: 18px;
+      --shadow: 0 18px 50px rgba(16, 42, 67, .1);
+      --max: 1120px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 88px; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--white);
+      font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+    body.menu-open { overflow: hidden; }
+    .scroll-progress { position: fixed; inset: 0 auto auto 0; z-index: 100; width: 0; height: 3px; background: linear-gradient(90deg, var(--cyan), #72a7ff); box-shadow: 0 0 16px rgba(62, 198, 196, .6); }
+    a { color: inherit; }
+    img { display: block; max-width: 100%; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    :focus-visible { outline: 3px solid var(--cyan); outline-offset: 3px; }
+
+    .container { width: min(calc(100% - 48px), var(--max)); margin-inline: auto; }
+    .section { padding: 96px 0; }
+    .section-soft { background: var(--mist); border-block: 1px solid var(--line); }
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    h1, h2, h3 { color: var(--ink); letter-spacing: -.035em; }
+    h1 { margin-bottom: 24px; font-size: clamp(44px, 6vw, 72px); line-height: 1.02; }
+    h2 { margin-bottom: 18px; font-size: clamp(34px, 4vw, 48px); line-height: 1.08; }
+    h3 { margin-bottom: 10px; font-size: 21px; line-height: 1.25; }
+    p { color: var(--muted); font-size: 17px; line-height: 1.7; }
+    .lead { max-width: 720px; margin-bottom: 48px; font-size: 20px; }
+
+    /* Navigation */
+    .site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(255, 255, 255, .95);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(16px);
+      transition: box-shadow .25s ease, background .25s ease;
+    }
+    .site-nav.scrolled { background: rgba(255, 255, 255, .985); box-shadow: 0 10px 30px rgba(16, 42, 67, .09); }
+    .nav-inner { min-height: 74px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
+    .wordmark { text-decoration: none; font-size: 23px; font-weight: 850; letter-spacing: -.04em; }
+    .wordmark span { color: var(--blue); }
+    .nav-links { display: flex; align-items: center; gap: 28px; }
+    .nav-links a { color: #42566a; font-size: 14px; font-weight: 650; text-decoration: none; }
+    .nav-links a:hover { color: var(--blue); }
+    .nav-links a.active:not(.nav-cta) { color: var(--blue); }
+    .nav-cta, .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 24px;
+      color: var(--white) !important;
+      background: var(--blue);
+      border: 0;
+      border-radius: 9px;
+      font-size: 15px;
+      font-weight: 750;
+      text-decoration: none;
+      transition: transform .2s ease, background .2s ease, box-shadow .2s ease;
+    }
+    .nav-cta { min-height: 42px; padding-inline: 18px; }
+    .button:hover, .nav-cta:hover { background: var(--blue-dark); transform: translateY(-1px); box-shadow: 0 10px 24px rgba(37, 99, 235, .24); }
+    .button-secondary { color: var(--white) !important; background: rgba(255, 255, 255, .09); border: 1px solid rgba(255, 255, 255, .2); }
+    .button-secondary:hover { background: rgba(255, 255, 255, .15); }
+    .menu-button { display: none; padding: 9px; color: var(--ink); background: transparent; border: 1px solid var(--line); border-radius: 8px; }
+    .menu-button span { display: block; width: 22px; height: 2px; margin: 4px 0; background: currentColor; }
+
+    /* Hero */
+    .hero { overflow: hidden; color: var(--white); background: radial-gradient(circle at 78% 24%, #174b83 0, #102b52 28%, #081a33 66%); }
+    .hero-inner { min-height: 690px; display: grid; grid-template-columns: 1.1fr .9fr; align-items: center; gap: 64px; padding-block: 88px; }
+    .hero h1, .hero h2, .hero h3 { color: var(--white); }
+    .hero h1 span { color: #72a7ff; }
+    .hero .eyebrow { color: var(--cyan); }
+    .hero-copy > p { max-width: 700px; color: #bed0df; font-size: 20px; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin: 34px 0 30px; }
+    .scope-note { display: flex; gap: 10px; align-items: flex-start; max-width: 650px; color: #a9bfd0; font-size: 14px; line-height: 1.55; }
+    .scope-note strong { color: var(--white); }
+    .hero-visual {
+      position: relative;
+      min-height: 430px;
+      padding: 46px;
+      background: rgba(6, 24, 47, .5);
+      border: 1px solid rgba(255, 255, 255, .14);
+      border-radius: 28px;
+      box-shadow: 0 32px 90px rgba(0, 0, 0, .25);
+      animation: hero-float 7s ease-in-out infinite;
+    }
+    .hero-visual::before, .hero-visual::after { content: ""; position: absolute; z-index: -1; border-radius: 50%; filter: blur(2px); }
+    .hero-visual::before { width: 170px; height: 170px; top: -54px; right: -46px; background: rgba(62, 198, 196, .13); }
+    .hero-visual::after { width: 110px; height: 110px; bottom: -35px; left: -35px; background: rgba(114, 167, 255, .13); }
+    .hero-logo { width: 250px; max-height: 185px; margin: -15px auto 8px; object-fit: contain; filter: drop-shadow(0 12px 30px rgba(62, 198, 196, .12)); }
+    .visual-kicker { margin: 0 0 32px; color: #bcd0df; text-align: center; font-size: 14px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; }
+    .priority-list { display: grid; gap: 12px; }
+    .priority-row { display: grid; grid-template-columns: 34px 1fr auto; align-items: center; gap: 14px; padding: 15px; background: rgba(255, 255, 255, .07); border-radius: 12px; }
+    .priority-row { transition: transform .25s ease, background .25s ease; }
+    .priority-row:hover { transform: translateX(6px); background: rgba(255, 255, 255, .11); }
+    .priority-rank { display: grid; place-items: center; width: 34px; aspect-ratio: 1; color: var(--navy); background: var(--cyan); border-radius: 50%; font-size: 13px; font-weight: 850; }
+    .priority-name { color: var(--white); font-size: 14px; font-weight: 750; }
+    .priority-context { margin-top: 3px; color: #93aab9; font-size: 12px; }
+    .priority-level { color: #b8e986; font-size: 12px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+
+    .facts { background: #f8fbfd; border-bottom: 1px solid var(--line); }
+    .facts-inner { display: grid; grid-template-columns: repeat(4, 1fr); }
+    .fact { padding: 34px 24px; text-align: center; border-right: 1px solid var(--line); }
+    .fact:last-child { border-right: 0; }
+    .fact strong { display: block; color: var(--blue); font-size: 32px; letter-spacing: -.04em; }
+    .fact span { display: block; margin-top: 5px; color: var(--muted); font-size: 13px; line-height: 1.4; }
+
+    /* Content systems */
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 26px; }
+    .card { padding: 30px; background: var(--white); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: 0 4px 16px rgba(16, 42, 67, .04); transition: transform .3s ease, box-shadow .3s ease, border-color .3s ease; }
+    .card:hover { transform: translateY(-6px); border-color: #bfd1e4; box-shadow: 0 18px 44px rgba(16, 42, 67, .1); }
+    .card p:last-child { margin-bottom: 0; }
+    .number { display: grid; place-items: center; width: 44px; aspect-ratio: 1; margin-bottom: 22px; color: var(--white); background: var(--blue); border-radius: 50%; font-weight: 850; }
+    .icon { display: grid; place-items: center; width: 48px; aspect-ratio: 1; margin-bottom: 22px; color: var(--blue); background: #e9f1ff; border-radius: 12px; font-size: 22px; }
+
+    .compare { overflow: hidden; margin-top: 40px; border: 1px solid var(--line); border-radius: var(--radius); }
+    .compare-row { display: grid; grid-template-columns: 1fr 1fr; }
+    .compare-row > div { padding: 17px 22px; border-bottom: 1px solid var(--line); }
+    .compare-row > div + div { border-left: 1px solid var(--line); }
+    .compare-row:last-child > div { border-bottom: 0; }
+    .compare-head > div { color: var(--white); background: var(--navy); font-size: 14px; font-weight: 800; }
+    .compare-head > div:first-child { color: var(--muted); background: var(--mist); }
+    .compare-row:not(.compare-head) > div { font-size: 15px; line-height: 1.5; }
+    .compare-row:not(.compare-head) > div:first-child { color: var(--muted); background: #fbfdfe; }
+    .compare-row:not(.compare-head) > div:last-child { font-weight: 700; }
+
+    .method-card { position: relative; padding-top: 64px; }
+    .method-card::before { content: attr(data-step); position: absolute; top: 25px; left: 30px; color: var(--cyan); font-size: 13px; font-weight: 850; letter-spacing: .12em; }
+    .responsible { margin-top: 30px; padding: 22px 24px; color: var(--amber); background: var(--amber-bg); border: 1px solid #edd38a; border-radius: 12px; font-size: 15px; line-height: 1.65; }
+
+    .report-layout { display: grid; grid-template-columns: .85fr 1.15fr; align-items: center; gap: 72px; }
+    .check-list { margin: 28px 0 34px; padding: 0; list-style: none; }
+    .check-list li { position: relative; margin: 14px 0; padding-left: 28px; color: #42566a; line-height: 1.5; }
+    .check-list li::before { content: "✓"; position: absolute; left: 0; color: var(--blue); font-weight: 900; }
+    .report-frame { position: relative; padding: 18px; background: var(--white); border: 1px solid var(--line); border-radius: 20px; box-shadow: var(--shadow); transform: perspective(1200px) rotateY(-2deg); transition: transform .35s ease, box-shadow .35s ease; }
+    .report-frame:hover { transform: perspective(1200px) rotateY(0) translateY(-4px); box-shadow: 0 28px 70px rgba(16, 42, 67, .16); }
+    .report-frame img { width: 100%; border-radius: 10px; }
+    .report-open { position: absolute; inset: auto 32px 32px auto; min-height: 42px; padding: 0 17px; color: var(--white); background: rgba(8, 26, 51, .9); border: 1px solid rgba(255,255,255,.24); border-radius: 9px; font: inherit; font-size: 14px; font-weight: 750; cursor: pointer; backdrop-filter: blur(10px); transition: background .2s ease, transform .2s ease; }
+    .report-open:hover { background: var(--blue); transform: translateY(-2px); }
+    .report-thumbs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 16px; }
+    .report-thumb { padding: 0; background: var(--white); border: 2px solid transparent; border-radius: 8px; cursor: pointer; overflow: hidden; opacity: .72; transition: opacity .2s ease, border-color .2s ease, transform .2s ease; }
+    .report-thumb:hover, .report-thumb.active { opacity: 1; border-color: var(--blue); transform: translateY(-2px); }
+    .report-thumb img { width: 100%; aspect-ratio: .773; object-fit: cover; object-position: top; }
+
+    .report-modal { width: min(92vw, 920px); max-height: 92vh; padding: 0; border: 0; border-radius: 18px; box-shadow: 0 32px 110px rgba(0,0,0,.45); overflow: hidden; }
+    .report-modal::backdrop { background: rgba(4, 15, 31, .82); backdrop-filter: blur(8px); }
+    .modal-bar { display: flex; justify-content: space-between; align-items: center; gap: 20px; padding: 15px 18px; color: var(--white); background: var(--navy); }
+    .modal-bar strong { font-size: 14px; }
+    .modal-close { display: grid; place-items: center; width: 36px; aspect-ratio: 1; color: var(--white); background: rgba(255,255,255,.1); border: 0; border-radius: 50%; font-size: 21px; cursor: pointer; }
+    .modal-image-wrap { max-height: calc(92vh - 66px); padding: 20px; background: #eaf0f4; overflow: auto; }
+    .modal-image-wrap img { width: 100%; }
+
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s cubic-bezier(.2,.8,.2,1), transform .7s cubic-bezier(.2,.8,.2,1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: .08s; }
+    .reveal-delay-2 { transition-delay: .16s; }
+    .reveal-delay-3 { transition-delay: .24s; }
+
+    @keyframes hero-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
+
+    .score-card { overflow: hidden; color: var(--white); background: var(--navy); border-radius: 24px; box-shadow: var(--shadow); }
+    .score-head { display: flex; justify-content: space-between; gap: 30px; padding: 38px; background: linear-gradient(135deg, #102b52, #0b203e); }
+    .score-head p { margin-bottom: 0; color: #a9bfd0; font-size: 14px; }
+    .score-value { color: var(--white); font-size: 62px; font-weight: 850; line-height: 1; letter-spacing: -.06em; }
+    .score-value small { font-size: 18px; color: #91a8b9; letter-spacing: 0; }
+    .priority-badge { align-self: center; padding: 9px 15px; color: var(--navy); background: #b8e986; border-radius: 999px; font-size: 13px; font-weight: 850; }
+    .score-body { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; background: rgba(255, 255, 255, .12); }
+    .score-cell { padding: 24px 18px; background: #0b203e; }
+    .score-cell span { display: block; min-height: 42px; color: #9fb5c4; font-size: 12px; line-height: 1.4; }
+    .score-cell strong { display: block; margin-top: 8px; color: var(--white); font-size: 22px; }
+    .score-meta { padding: 22px 38px; color: #a9bfd0; background: #07182e; font-size: 13px; line-height: 1.6; }
+
+    .pilot { color: var(--white); background: linear-gradient(135deg, var(--navy), #123864); }
+    .pilot h2, .pilot h3 { color: var(--white); }
+    .pilot .eyebrow { color: var(--cyan); }
+    .pilot .lead { color: #bfd1df; }
+    .pilot-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; counter-reset: pilot; }
+    .pilot-step { padding: 26px; background: rgba(255, 255, 255, .07); border: 1px solid rgba(255, 255, 255, .13); border-radius: 15px; }
+    .pilot-step::before { counter-increment: pilot; content: "0" counter(pilot); display: block; margin-bottom: 22px; color: var(--cyan); font-size: 14px; font-weight: 850; }
+    .pilot-step p { margin: 0; color: #a9bfd0; font-size: 15px; }
+    .pilot-close { display: flex; justify-content: space-between; align-items: center; gap: 30px; margin-top: 38px; padding: 28px 30px; background: rgba(255, 255, 255, .07); border-radius: 15px; }
+    .pilot-close p { max-width: 670px; margin: 0; color: #c2d2de; font-size: 15px; }
+
+    .audience-card h3 { margin-top: 4px; }
+    .founder-note { margin-top: 44px; padding-top: 28px; border-top: 1px solid var(--line); }
+    .founder-note p { margin-bottom: 0; font-size: 15px; }
+
+    .cta { padding: 96px 0; color: var(--white); text-align: center; background: var(--navy); }
+    .cta h2 { color: var(--white); }
+    .cta p { max-width: 650px; margin: 0 auto 32px; color: #b8cbd8; }
+    .cta .button { min-height: 54px; padding-inline: 32px; font-size: 17px; }
+
+    footer { padding: 28px 0; background: #061326; }
+    .footer-inner { display: flex; justify-content: space-between; align-items: center; gap: 24px; color: #8fa6b6; font-size: 13px; }
+    .footer-inner a { color: #bcd0df; text-decoration: none; }
+
+    @media (max-width: 900px) {
+      .hero-inner, .report-layout { grid-template-columns: 1fr; }
+      .hero-inner { padding-block: 70px; }
+      .hero-visual { min-height: 0; }
+      .grid-3 { grid-template-columns: 1fr 1fr; }
+      .facts-inner { grid-template-columns: repeat(2, 1fr); }
+      .fact:nth-child(2) { border-right: 0; }
+      .fact:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+      .score-body { grid-template-columns: 1fr 1fr; }
+      .score-cell:last-child { grid-column: 1 / -1; }
+      .pilot-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 760px) {
+      html { scroll-padding-top: 72px; }
+      .container { width: min(calc(100% - 32px), var(--max)); }
+      .section { padding: 72px 0; }
+      .nav-inner { min-height: 68px; }
+      .menu-button { display: block; }
+      .nav-links {
+        position: absolute;
+        top: 68px;
+        left: 0;
+        right: 0;
+        display: none;
+        align-items: stretch;
+        gap: 0;
+        padding: 14px 16px 20px;
+        background: var(--white);
+        border-bottom: 1px solid var(--line);
+        box-shadow: 0 16px 32px rgba(16, 42, 67, .12);
+      }
+      .nav-links.open { display: grid; }
+      .nav-links a { padding: 13px 10px; }
+      .nav-links .nav-cta { margin-top: 8px; padding: 0 18px; }
+      .hero-inner { min-height: 0; gap: 46px; padding-block: 58px; }
+      .hero-copy > p { font-size: 18px; }
+      .hero-visual { padding: 28px 20px; }
+      .hero-logo { width: 205px; max-height: 145px; margin: -10px auto 10px; }
+      .visual-kicker { margin-bottom: 24px; }
+      .grid-3, .grid-2, .pilot-grid { grid-template-columns: 1fr; }
+      .compare { overflow-x: auto; }
+      .compare-row { min-width: 620px; }
+      .score-head { flex-direction: column; padding: 28px 24px; }
+      .priority-badge { align-self: flex-start; }
+      .score-body { grid-template-columns: 1fr; }
+      .score-cell:last-child { grid-column: auto; }
+      .score-meta { padding: 20px 24px; }
+      .pilot-close { align-items: stretch; flex-direction: column; }
+      .pilot-close .button { width: 100%; }
+      .footer-inner { align-items: flex-start; flex-direction: column; }
+      .report-frame { transform: none; }
+      .report-open { inset: auto 26px 26px auto; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-actions { display: grid; }
+      .hero-actions .button { width: 100%; }
+      .facts-inner { grid-template-columns: 1fr; }
+      .fact { border-right: 0; border-bottom: 1px solid var(--line); }
+      .fact:last-child { border-bottom: 0; }
+      .priority-row { grid-template-columns: 32px 1fr; }
+      .priority-level { grid-column: 2; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition-duration: .01ms !important; }
+      .hero-visual { animation: none; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
 </head>
 <body>
-
-<!-- NAV -->
-<nav>
-    <div class="logo">Loci<span>vra</span>™</div>
-    <div class="nav-links">
+  <div class="scroll-progress" aria-hidden="true"></div>
+  <nav class="site-nav" aria-label="Primary navigation">
+    <div class="container nav-inner">
+      <a class="wordmark" href="#top" aria-label="Locivra home">Loci<span>vra</span>™</a>
+      <button class="menu-button" type="button" aria-label="Open navigation" aria-controls="nav-links" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nav-links" id="nav-links">
         <a href="#why">Why Locivra</a>
-	<a href="#how">How It Works</a>
-	<a href="#data">Data</a>
-        <a href="#who">Who It's For</a>
-        <a href="mailto:alexbabb37@gmail.com" class="nav-cta">Request a Demo</a>
+        <a href="#how">How it works</a>
+        <a href="#methodology">Methodology</a>
+        <a href="#pilot">Pilot</a>
+        <a class="nav-cta" href="mailto:alexbabb37@gmail.com?subject=Locivra%20pilot%20discussion">Discuss a pilot</a>
+      </div>
     </div>
-</nav>
+  </nav>
 
-<!-- HERO -->
-<section class="hero">
-    <img src="locivra_logo.png" alt="locivra logo" class="hero-logo">
-    <div class="hero-subtitle">AI-Assisted CPTED Analytics</div>
-    <div class="hero-badge">Spatial Risk Intelligence</div>
-    <h1>Prioritize security<br><span>where it matters most.</span></h1>
-    <p>Organizations with multiple locations struggle to decide which sites need security attention first. Locivra simplifies that decision by turning crime data into explainable risk rankings, CPTED-informed recommendations, and professional reports.</p>
-
-    <p style="margin-top: 16px;">
-      <span style="background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); padding: 6px 14px; border-radius: 20px; font-size: 13px;">🇨🇦 Built for Canadian organizations using Canadian crime data</span>
-    </p>
-
-    <p style="margin-top: 12px; font-size: 16px; color: #94a3b8;">Designed for retail chains, property managers, commercial real estate, and security consultants.</p>   
-    <div class="hero-buttons">
-        <a href="mailto:alexbabb37@gmail.com" class="btn-primary">Request a Demo</a>
-        <a href="#how" class="btn-secondary">See How It Works</a>
-    </div>
-</section>
-
-<!-- STATS -->
-<div class="stats">
-    <div class="stat">
-        <div class="stat-number">458,000+</div>
-        <div class="stat-label">Crime incidents analyzed</div>
-    </div>
-    <div class="stat">
-        <div class="stat-number">5</div>
-        <div class="stat-label">Crime categories scored</div>
-    </div>
-    <div class="stat">
-        <div class="stat-number">30s</div>
-        <div class="stat-label">To generate a full report</div>
-    </div>
-    <div class="stat">
-        <div class="stat-number">100</div>
-        <div class="stat-label">Point scoring scale</div>
-    </div>
-</div>
-
-<!-- HOW IT WORKS -->
-<section class="section" id="how">
-    <div class="section-label">How It Works</div>
-    <h2>Prioritize locations, then take action.</h2>
-    <p class="section-sub">Designed to help organizations prioritize which locations need security attention first. Enter a location or upload multiple sites to generate explainable risk scores and professional reports.</p>
-</p>
-    <div class="steps">
-        <div class="step">
-            <div class="step-number">1</div>
-            <h3>Enter one or more locations</h3>
-            <p>Enter a Toronto address or upload multiple locations. Locivra retrieves nearby crime data and begins analyzing each site.</p>
+  <main id="top">
+    <section class="hero">
+      <div class="container hero-inner">
+        <div class="hero-copy reveal visible">
+          <p class="eyebrow">Location intelligence for security prioritization</p>
+          <h1>Prioritize which locations deserve <span>security attention first.</span></h1>
+          <p>Locivra compares historical crime exposure around multiple locations and turns it into explainable priority rankings and decision-ready reports.</p>
+          <div class="hero-actions">
+            <a class="button" href="mailto:alexbabb37@gmail.com?subject=Locivra%20pilot%20discussion">Discuss a pilot</a>
+            <a class="button button-secondary" href="#how">See how it works</a>
+          </div>
+          <div class="scope-note"><span aria-hidden="true">●</span><span><strong>Current scope:</strong> Toronto locations using Toronto Police Service Open Data. Designed to support—not replace—professional judgment, CPTED assessments and site visits.</span></div>
         </div>
-        <div class="step">
-            <div class="step-number">2</div>
-            <h3>Prioritize risk</h3>
-            <p>Receive an explainable Retail Safety Score, crime breakdowns, and key risk drivers to quickly identify which locations deserve further attention.</p>
+        <div class="hero-visual reveal visible" aria-label="Illustrative portfolio priority list">
+          <img class="hero-logo" src="locivra_logo.png" alt="Locivra">
+          <div class="visual-kicker">Illustrative portfolio view</div>
+          <div class="priority-list">
+            <div class="priority-row"><span class="priority-rank">1</span><div><div class="priority-name">Downtown location</div><div class="priority-context">Higher surrounding historical exposure</div></div><span class="priority-level">Review first</span></div>
+            <div class="priority-row"><span class="priority-rank">2</span><div><div class="priority-name">Midtown location</div><div class="priority-context">Multiple elevated contributors</div></div><span class="priority-level">Review next</span></div>
+            <div class="priority-row"><span class="priority-rank">3</span><div><div class="priority-name">Outer-area location</div><div class="priority-context">Lower relative exposure</div></div><span class="priority-level">Monitor</span></div>
+          </div>
         </div>
-        <div class="step">
-            <div class="step-number">3</div>
-            <h3>Generate a decision-ready report</h3>
-            <p>Export a professional report summarizing risk, supporting data, and CPTED-informed recommendations to support security planning and stakeholder communication.</p>
+      </div>
+    </section>
+
+    <section class="facts" aria-label="Current Locivra framework">
+      <div class="container facts-inner">
+        <div class="fact"><strong>5</strong><span>retail-relevant crime categories</span></div>
+        <div class="fact"><strong>500 m</strong><span>recommended urban-retail default radius</span></div>
+        <div class="fact"><strong>0–100</strong><span>explainable location-priority score</span></div>
+        <div class="fact"><strong>4–6 weeks</strong><span>suggested pilot evaluation period</span></div>
+      </div>
+    </section>
+
+    <section class="section" id="why">
+      <div class="container">
+        <p class="eyebrow">Why Locivra</p>
+        <h2>Security teams have more locations than attention.</h2>
+        <p class="lead">When budgets and analyst time are limited, the first decision is not what intervention to deploy. It is where a closer review could create the most value.</p>
+        <div class="grid-2">
+          <article class="card reveal">
+            <div class="icon" aria-hidden="true">?</div>
+            <h3>The current challenge</h3>
+            <p>Location comparisons often depend on scattered data, spreadsheets, recent incidents or inconsistent judgment. Teams spend time building context before analysis can begin.</p>
+          </article>
+          <article class="card reveal reveal-delay-1">
+            <div class="icon" aria-hidden="true">→</div>
+            <h3>A defensible starting point</h3>
+            <p>Locivra creates a consistent first-pass priority list, shows the historical crime factors influencing each score and produces an output stakeholders can review.</p>
+          </article>
         </div>
+        <div class="compare reveal" role="table" aria-label="Current process compared with Locivra">
+          <div class="compare-row compare-head" role="row"><div role="columnheader">Typical first-pass process</div><div role="columnheader">With Locivra</div></div>
+          <div class="compare-row" role="row"><div role="cell">Review locations one by one</div><div role="cell">Compare a submitted portfolio together</div></div>
+          <div class="compare-row" role="row"><div role="cell">Gather and normalize crime context manually</div><div role="cell">Apply one transparent scoring framework</div></div>
+          <div class="compare-row" role="row"><div role="cell">Struggle to explain why one site goes first</div><div role="cell">See the contributing categories and relative position</div></div>
+          <div class="compare-row" role="row"><div role="cell">Commission deeper reviews without portfolio triage</div><div role="cell">Focus expert review on locations that warrant attention</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-soft" id="how">
+      <div class="container">
+        <p class="eyebrow">How it works</p>
+        <h2>From an address list to an explainable priority queue.</h2>
+        <p class="lead">The workflow is intentionally simple so users can reach the decision faster without treating the score as an automated verdict.</p>
+        <div class="grid-3">
+          <article class="card reveal"><div class="number">1</div><h3>Share 5–20 locations</h3><p>Provide Toronto addresses in a spreadsheet or CSV and confirm the decision the portfolio review should support.</p></article>
+          <article class="card reveal reveal-delay-1"><div class="number">2</div><h3>Compare historical exposure</h3><p>Locivra applies the selected radius, distance weighting, crime-category weights and Toronto comparison context.</p></article>
+          <article class="card reveal reveal-delay-2"><div class="number">3</div><h3>Review the output</h3><p>Receive a ranked portfolio, plain-language score explanation, PDF report and options for deeper follow-up on priority locations.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="methodology">
+      <div class="container">
+        <p class="eyebrow">Data and methodology</p>
+        <h2>Transparent by design—not a black box.</h2>
+        <p class="lead">Version 1.0 is a prototype methodology informed by environmental criminology, place-based research, CPTED and RTM principles. Its assumptions are disclosed so they can be tested and improved.</p>
+        <div class="grid-3">
+          <article class="card method-card reveal" data-step="01 / DATA"><h3>Historical reported crime</h3><p>Current analysis uses Toronto Police Service Open Data for Assault, Robbery, Break and Enter, Auto Theft, and Theft Over $5,000.</p></article>
+          <article class="card method-card reveal reveal-delay-1" data-step="02 / PROXIMITY"><h3>Distance-weighted exposure</h3><p>Incidents closer to the selected location receive more influence than incidents near the edge of the analysis radius.</p></article>
+          <article class="card method-card reveal reveal-delay-2" data-step="03 / RELEVANCE"><h3>Prototype crime weights</h3><p>Categories are weighted for their current estimated relevance to retail safety, staff and customer harm, and property loss.</p></article>
+          <article class="card method-card reveal" data-step="04 / CONTEXT"><h3>Relative comparison</h3><p>Location exposure is compared with broader Toronto patterns to create sub-scores and an overall 0–100 priority score.</p></article>
+          <article class="card method-card reveal reveal-delay-1" data-step="05 / EXPLANATION"><h3>Visible assumptions</h3><p>Reports state the radius, data source, date coverage, contributors and limitations so the result can be interrogated.</p></article>
+          <article class="card method-card reveal reveal-delay-2" data-step="06 / VALIDATION"><h3>Validation before expansion</h3><p>Radius, decay logic, crime weights and future environmental layers require expert feedback and empirical testing.</p></article>
+        </div>
+        <div class="responsible"><strong>Responsible-use boundary:</strong> Locivra uses historical reported-crime data to support location prioritization. It does not predict that crime will occur, certify a location as safe or unsafe, or replace internal incident data, professional judgment and site assessment.</div>
+      </div>
+    </section>
+
+    <section class="section section-soft">
+      <div class="container report-layout">
+        <div>
+          <p class="eyebrow">Decision-ready output</p>
+          <h2>Make the priority easier to review and explain.</h2>
+          <p>Each assessment packages the portfolio view and the reasoning behind it into a shareable format.</p>
+          <ul class="check-list">
+            <li>Ranked portfolio of submitted locations</li>
+            <li>Overall and crime-category priority scores</li>
+            <li>Plain-language explanation of key contributors</li>
+            <li>Documented data scope, radius and limitations</li>
+            <li>Optional site-level follow-up for priority locations</li>
+          </ul>
+          <a class="button" href="mailto:alexbabb37@gmail.com?subject=Locivra%20sample%20report">Request a sample report</a>
+        </div>
+        <div class="reveal">
+          <div class="report-frame">
+            <img id="report-main-image" src="portfolio_report_page_1.png" alt="Page 1 of a Locivra portfolio security prioritization report">
+            <button class="report-open" type="button">View full report</button>
+          </div>
+          <div class="report-thumbs" aria-label="Portfolio report pages">
+            <button class="report-thumb active" type="button" data-page="1" aria-label="Show report page 1"><img src="portfolio_report_page_1.png" alt=""></button>
+            <button class="report-thumb" type="button" data-page="2" aria-label="Show report page 2"><img src="portfolio_report_page_2.png" alt=""></button>
+            <button class="report-thumb" type="button" data-page="3" aria-label="Show report page 3"><img src="portfolio_report_page_3.png" alt=""></button>
+            <button class="report-thumb" type="button" data-page="4" aria-label="Show report page 4"><img src="portfolio_report_page_4.png" alt=""></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" aria-labelledby="sample-score-title">
+      <div class="container">
+        <p class="eyebrow">Illustrative sample</p>
+        <h2 id="sample-score-title">A score starts a review—it does not settle one.</h2>
+        <p class="lead">This example shows the structure of a Locivra output. Values are illustrative and should not be treated as a current assessment of a real location.</p>
+        <div class="score-card reveal">
+          <div class="score-head">
+            <div><p>Illustrative portfolio location</p><div class="score-value">78.7 <small>/ 100</small></div></div>
+            <div class="priority-badge">High review priority</div>
+          </div>
+          <div class="score-body">
+            <div class="score-cell"><span>Theft Over $5,000</span><strong>82</strong></div>
+            <div class="score-cell"><span>Break and Enter</span><strong>76</strong></div>
+            <div class="score-cell"><span>Robbery</span><strong>71</strong></div>
+            <div class="score-cell"><span>Assault</span><strong>80</strong></div>
+            <div class="score-cell"><span>Auto Theft</span><strong>45</strong></div>
+          </div>
+          <div class="score-meta">Illustrative only · Recommended report context: selected radius, analysis period, data source, last-updated date, distance-weighted exposure, category weights and responsible-use limitations.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section pilot" id="pilot">
+      <div class="container">
+        <p class="eyebrow">Pilot program</p>
+        <h2>Test the workflow with 5–20 real locations.</h2>
+        <p class="lead">A four-to-six-week pilot is designed to answer one practical question: does Locivra help your team decide where to look first?</p>
+        <div class="pilot-grid">
+          <article class="pilot-step"><h3>Align</h3><p>Confirm the portfolio, use case, current process and measures of usefulness.</p></article>
+          <article class="pilot-step"><h3>Analyze</h3><p>Load the location list and produce the ranked portfolio and draft reports.</p></article>
+          <article class="pilot-step"><h3>Review</h3><p>Compare the output with practitioner knowledge and identify unclear assumptions.</p></article>
+          <article class="pilot-step"><h3>Decide</h3><p>Refine, expand, move into deeper assessment—or stop based on the evidence.</p></article>
+        </div>
+        <div class="pilot-close"><p><strong>Current pilot offer:</strong> available at no cost in exchange for structured feedback. Setup can take less than one week once the locations and objective are confirmed.</p><a class="button" href="mailto:alexbabb37@gmail.com?subject=Locivra%20pilot%20discussion">Discuss a pilot</a></div>
+      </div>
+    </section>
+
+    <section class="section" id="who">
+      <div class="container">
+        <p class="eyebrow">Who it is for</p>
+        <h2>Built for people allocating physical-security attention.</h2>
+        <p class="lead">Locivra is most useful when one team is responsible for multiple sites and needs a consistent first-pass view.</p>
+        <div class="grid-3">
+          <article class="card audience-card"><div class="icon" aria-hidden="true">R</div><h3>Retail and loss prevention</h3><p>Prioritize store reviews, security planning and deeper CPTED or operational assessment across a portfolio.</p></article>
+          <article class="card audience-card"><div class="icon" aria-hidden="true">P</div><h3>Property portfolios</h3><p>Compare historical surrounding crime exposure as one input alongside professional due diligence and site review.</p></article>
+          <article class="card audience-card"><div class="icon" aria-hidden="true">S</div><h3>Security consultants</h3><p>Use a transparent first-pass screen to focus assessment effort and communicate portfolio priorities with clients.</p></article>
+        </div>
+        <div class="founder-note"><p><strong>Built by Alex Babb</strong> · Criminal Justice &amp; Public Policy, University of Guelph · <a href="mailto:alexbabb37@gmail.com">alexbabb37@gmail.com</a></p></div>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="container">
+        <p class="eyebrow">Start with a bounded test</p>
+        <h2>Which locations should your team look at first?</h2>
+        <p>Bring a portfolio of 5–20 Toronto locations and a real prioritization decision. We will scope a pilot around the evidence your team needs.</p>
+        <a class="button" href="mailto:alexbabb37@gmail.com?subject=Locivra%20pilot%20discussion">Discuss a Locivra pilot</a>
+      </div>
+    </section>
+  </main>
+
+  <dialog class="report-modal" aria-label="Locivra portfolio report preview">
+    <div class="modal-bar"><strong id="modal-title">Portfolio report · Page 1 of 4</strong><button class="modal-close" type="button" aria-label="Close report preview">×</button></div>
+    <div class="modal-image-wrap"><img id="modal-report-image" src="portfolio_report_page_1.png" alt="Page 1 of a Locivra portfolio security prioritization report"></div>
+  </dialog>
+
+  <footer>
+    <div class="container footer-inner">
+      <div>Locivra™ · Location intelligence for security prioritization</div>
+      <div><a href="#methodology">Methodology</a> · <a href="mailto:alexbabb37@gmail.com">Contact Alex</a></div>
     </div>
-</section>
+  </footer>
 
-<!-- WHY Locivra -->
-<section class="section" id="why">
-    <div class="section-label">Why Locivra</div>
+  <script>
+    const menuButton = document.querySelector('.menu-button');
+    const navLinks = document.querySelector('.nav-links');
+    const siteNav = document.querySelector('.site-nav');
+    const progress = document.querySelector('.scroll-progress');
 
-    <h2>Security teams need to know<br>where to act first.</h2>
+    menuButton.addEventListener('click', () => {
+      const open = navLinks.classList.toggle('open');
+      menuButton.setAttribute('aria-expanded', String(open));
+      menuButton.setAttribute('aria-label', open ? 'Close navigation' : 'Open navigation');
+      document.body.classList.toggle('menu-open', open);
+    });
 
-    <p class="section-sub">
-        Organizations often manage many stores, properties, or facilities, but security time and budgets are limited. Locivra helps turn raw crime data into a clear first-pass priority list.
-    </p>
+    navLinks.addEventListener('click', event => {
+      if (event.target.closest('a')) {
+        navLinks.classList.remove('open');
+        menuButton.setAttribute('aria-expanded', 'false');
+        menuButton.setAttribute('aria-label', 'Open navigation');
+        document.body.classList.remove('menu-open');
+      }
+    });
 
-    <div class="problem-grid">
-        <div class="problem-card">
-            <h3>The Problem</h3>
-            <p>
-                Teams may know risk exists, but they still need to decide which locations need assessments, upgrades, or closer review first.
-            </p>
-            <ul>
-                <li>✓ Limited security budgets</li>
-                <li>✓ Too many locations to review manually</li>
-                <li>✓ Raw crime data is hard to compare</li>
-                <li>✓ Decisions often rely on spreadsheets or opinion</li>
-            </ul>
-        </div>
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const revealItems = document.querySelectorAll('.reveal:not(.visible)');
+    if (reduceMotion || !('IntersectionObserver' in window)) {
+      revealItems.forEach(item => item.classList.add('visible'));
+    } else {
+      const revealObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: .14, rootMargin: '0px 0px -40px' });
+      revealItems.forEach(item => revealObserver.observe(item));
+    }
 
-        <div class="problem-card">
-            <h3>The Solution</h3>
-            <p>
-                Locivra simplifies the first step by ranking locations, explaining key risk drivers, and generating CPTED-informed reports that support better decisions.
-            </p>
-            <ul>
-                <li>✓ Rank locations by priority</li>
-                <li>✓ Explain why a site is higher risk</li>
-                <li>✓ Support CPTED and security assessments</li>
-                <li>✓ Create reports stakeholders can understand</li>
-            </ul>
-        </div>
-    </div>
+    const sections = [...document.querySelectorAll('main section[id]')];
+    const sectionLinks = [...document.querySelectorAll('.nav-links a[href^="#"]')];
+    const updateScrollState = () => {
+      const top = window.scrollY;
+      const scrollable = document.documentElement.scrollHeight - window.innerHeight;
+      progress.style.width = `${scrollable > 0 ? (top / scrollable) * 100 : 0}%`;
+      siteNav.classList.toggle('scrolled', top > 12);
+      let current = '';
+      sections.forEach(section => { if (top >= section.offsetTop - 150) current = section.id; });
+      sectionLinks.forEach(link => link.classList.toggle('active', link.getAttribute('href') === `#${current}`));
+    };
+    window.addEventListener('scroll', updateScrollState, { passive: true });
+    updateScrollState();
 
-    <div style="margin-top: 48px; overflow-x: auto;">
-        <table style="width: 100%; border-collapse: collapse; font-size: 15px;">
-            <thead>
-                <tr>
-                    <th style="background: #f8fafc; padding: 14px 20px; text-align: left; border-bottom: 2px solid #e2e8f0; color: #64748b; font-weight: 600;">Traditional Process</th>
-                    <th style="background: #1a1a2e; padding: 14px 20px; text-align: left; border-bottom: 2px solid #1a1a2e; color: white; font-weight: 600;">Locivra</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td style="padding: 14px 20px; border-bottom: 1px solid #f0f0f0; color: #64748b;">Review locations manually one by one</td>
-                    <td style="padding: 14px 20px; border-bottom: 1px solid #f0f0f0; color: #1a1a2e; font-weight: 500;">Upload all locations at once</td>
-                </tr>
-                <tr style="background: #f8fafc;">
-                    <td style="padding: 14px 20px; border-bottom: 1px solid #f0f0f0; color: #64748b;">Search multiple crime sources manually</td>
-                    <td style="padding: 14px 20px; border-bottom: 1px solid #f0f0f0; color: #1a1a2e; font-weight: 500;">One portfolio report in minutes</td>
-                </tr>
-                <tr>
-                    <td style="padding: 14px 20px; border-bottom: 1px solid #f0f0f0; color: #64748b;">Unsure which location to assess first</td>
-                    <td style="padding: 14px 20px; border-bottom: 1px solid #f0f0f0; color: #1a1a2e; font-weight: 500;">Ranked priority list, ready to act on</td>
-                </tr>
-                <tr style="background: #f8fafc;">
-                    <td style="padding: 14px 20px; border-bottom: 1px solid #f0f0f0; color: #64748b;">Hire consultants to assess every site</td>
-                    <td style="padding: 14px 20px; border-bottom: 1px solid #f0f0f0; color: #1a1a2e; font-weight: 500;">Focus consultants on highest-risk sites only</td>
-                </tr>
-                <tr>
-                    <td style="padding: 14px 20px; color: #64748b;">Decisions based on opinion or spreadsheets</td>
-                    <td style="padding: 14px 20px; color: #1a1a2e; font-weight: 500;">Explainable scores backed by open data</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</section>
-
-<!-- REPORT PREVIEW -->
-<section class="section">
-
-    <div class="section-label">Professional Reports</div>
-
-    <h2>Turn raw crime data into<br>actionable decisions.</h2>
-
-    <p class="section-sub">
-        Every assessment generates a branded Retail Safety Risk Assessment in seconds.
-        Reports include an executive summary, crime breakdowns, risk scores,
-        priority vulnerabilities, and CPTED recommendations.
-    </p>
-
-    <div class="report-preview">
-
-        <div class="report-text">
-
-            <h3>Included in every report</h3>
-
-            <ul>
-                <li>✓ Executive Summary</li>
-                <li>✓ Overall Retail Safety Score</li>
-                <li>✓ Crime Breakdown</li>
-                <li>✓ CPTED Recommendations</li>
-                <li>✓ Professional PDF Export</li>
-            </ul>
-
-            <a href="mailto:alexbabb37@gmail.com" class="btn-primary">
-                Request Full Sample
-            </a>
-
-        </div>
-
-        <div class="report-image">
-            <img src="report_preview.png" alt="Report Preview">
-        </div>
-
-    </div>
-
-</section>
-
-<!-- DATA & METHODOLOGY -->
-
-<section class="data-section" id="data">
-
-<div class="data-inner">
-
-<div class="section-label">
-Data & Methodology
-</div>
-
-<h2>
-Built to be transparent,<br>
-not a black box.
-</h2>
-
-<p class="section-sub">
-Locivra uses publicly available crime data and an explainable scoring process to support first-pass security screening.
-</p>
-
-<div class="data-grid">
-
-<div class="data-card">
-<h3>📍 Data Source</h3>
-
-<p>
-Currently powered by Toronto Police Service Open Data using Major Crime Indicator datasets including Assault, Robbery, Break & Enter, Auto Theft, and Theft Over $5000.
-</p>
-</div>
-
-<div class="data-card">
-<h3>📊 How Locivra Scores Risk</h3>
-
-<p>
-Risk scores are generated using nearby crime incidents, crime category weighting, distance from the selected location, and comparison against other Toronto locations to create an explainable 0–100 Retail Safety Score.
-</p>
-</div>
-
-<div class="data-card">
-<h3>⚠ Current Scope</h3>
-
-<p>
-Locivra is designed as a first-pass decision-support tool. It supports—not replaces—professional CPTED assessments, site visits, internal incident reporting, and security consultant judgment.
-</p>
-</div>
-
-</div>
-
-</div>
-
-
-</section>
-<!-- WHO IT'S FOR -->
-<section class="for-section" id="who">
-    <div class="for-inner">
-        <div class="section-label">Who It's For</div>
-        <h2>Built for the people who<br>make security decisions.</h2>
-        <div class="cards">
-            <div class="card">
-                <div class="card-icon">🏪</div>
-                <h3>Retail Chains</h3>
-                <p>Prioritize security investments across your store portfolio. Quickly identify which locations should receive assessments, upgrades, or additional resources first.</p>
-            </div>
-            <div class="card">
-                <div class="card-icon">🏢</div>
-                <h3>Property Developers</h3>
-                <p>Evaluate site risk before development and identify environmental factors that can influence future security planning.</p>
-            </div>
-            <div class="card">
-                <div class="card-icon">🔒</div>
-                <h3>Security Consultants</h3>
-                <p>Use Locivra as a first-pass screening tool to prioritize assessments, support recommendations, and communicate findings with clients.</p>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- SCORE EXAMPLE -->
-<section class="score-section">
-    <div class="section-label">Sample Report</div>
-    <h2>What a Retail Safety<br>Score looks like.</h2>
-    <p class="section-sub">Every report includes an overall score, crime-type sub-scores, nearby incident counts, and tailored recommendations.</p>
-
-    <div class="score-demo">
-        <h3>Sample Location</h3>
-        <h4>500 Yonge St, Toronto, Ontario</h4>
-
-        <div class="overall-score">
-            <div>
-                <div class="overall-label">Overall Retail Safety Score</div>
-                <div class="overall-value">92.2</div>
-                <div class="overall-label">out of 100</div>
-            </div>
-            <div class="overall-tag">🔴 Critical Risk</div>
-        </div>
-
-        <div class="score-grid">
-	    <div class="score-item">
-   	        <div class="score-item-label">Theft Over $5000</div>
-    	        <div class="score-item-value">92.1/100</div>
-                <div class="score-item-risk">🔴 Critical — 217 nearby incidents</div>
-	    </div>
-            <div class="score-item">
-                <div class="score-item-label">Break & Enter</div>
-                <div class="score-item-value">100/100</div>
-                <div class="score-item-risk">🔴 Critical — 1,219 nearby incidents</div>
-            </div>
-            <div class="score-item">
-                <div class="score-item-label">Robbery</div>
-                <div class="score-item-value">100/100</div>
-                <div class="score-item-risk">🔴 Critical — 771 nearby incidents</div>
-            </div>
-            <div class="score-item">
-                <div class="score-item-label">Assault</div>
-                <div class="score-item-value">100/100</div>
-                <div class="score-item-risk">🔴 Critical — 4,701 nearby incidents</div>
-            </div>
-            <div class="score-item">
-                <div class="score-item-label">Auto Theft</div>
-                <div class="score-item-value low">22.3/100</div>
-                <div class="score-item-risk">🟢 Low — 248 nearby incidents</div>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- CTA -->
-<section class="cta-section">
-    <h2>Ready to see Locivra<br>in action?</h2>
-    <p>Request a walkthrough and see how Locivra scores locations, compares stores, and generates branded PDF reports.</p>
-    <a href="mailto:alexbabb37@gmail.com" class="btn-primary" style="font-size:18px; padding: 18px 40px;">Request a Demo</a>
-</section>
-
-<!-- FOOTER -->
-<footer>
-    <div>Locivra™ — Spatial Risk Intelligence</div>
-    <div>Built by Alex Babb · Criminal Justice, University of Guelph · alexbabb37@gmail.com</div>
-</footer>
-
+    const reportMain = document.querySelector('#report-main-image');
+    const reportThumbs = [...document.querySelectorAll('.report-thumb')];
+    const reportModal = document.querySelector('.report-modal');
+    const modalImage = document.querySelector('#modal-report-image');
+    const modalTitle = document.querySelector('#modal-title');
+    let currentReportPage = 1;
+    const setReportPage = page => {
+      currentReportPage = page;
+      const source = `portfolio_report_page_${page}.png`;
+      const alt = `Page ${page} of a Locivra portfolio security prioritization report`;
+      reportMain.src = source;
+      reportMain.alt = alt;
+      modalImage.src = source;
+      modalImage.alt = alt;
+      modalTitle.textContent = `Portfolio report · Page ${page} of 4`;
+      reportThumbs.forEach(thumb => thumb.classList.toggle('active', Number(thumb.dataset.page) === page));
+    };
+    reportThumbs.forEach(thumb => thumb.addEventListener('click', () => setReportPage(Number(thumb.dataset.page))));
+    document.querySelector('.report-open').addEventListener('click', () => {
+      setReportPage(currentReportPage);
+      reportModal.showModal();
+    });
+    document.querySelector('.modal-close').addEventListener('click', () => reportModal.close());
+    reportModal.addEventListener('click', event => { if (event.target === reportModal) reportModal.close(); });
+  </script>
 </body>
 </html>
